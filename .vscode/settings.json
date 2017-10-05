@@ -1,0 +1,9 @@
+{
+
+  // Number of spaces it should use per tab
+  "prettier.tabWidth": 2,
+  // Use tabs instead of spaces
+  "prettier.useTabs": false,
+  // Print semicolons at the ends of statements
+  "prettier.semi": false
+}
