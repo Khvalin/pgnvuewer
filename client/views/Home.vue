@@ -9,7 +9,7 @@
 
 <script>
 import Counter from 'components/Counter'
-import Board from 'components/Board'
+import Board from 'components/board/Board'
 
 export default {
   components: {
