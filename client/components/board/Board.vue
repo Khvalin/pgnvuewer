@@ -2,7 +2,7 @@
   <div class="board-wrapper">
     <div class="board">
     <div class="b-row" v-for="i in [8,7,6,5,4,3,2,1]" :key="i">
-      <Square :id="`${i}${j}`" :color="(i%2 === j%2)?'dark':'light'" v-for="j in 8" :key="j" />
+      <Square :ref="getSquareRefValue(i, j)" :id="`${i}${j}`" :color="(i%2 === j%2)?'dark':'light'" v-for="j in 8" :key="j" />
     </div>
     </div>
   </div>
@@ -10,12 +10,36 @@
 
 <script>
 import Square from 'components/board/Square'
+import Piece from 'components/board/Piece'
 
-export default {
+let output = null;
+
+export default (output = {
   components: {
     Square
+  },
+  methods: {
+    setPiece: function(coord, piece){
+      
+    },
+    toAlgebraicNotation: function(rowIndex, columnIndex){
+      const ABC = 'ABCDEFGH';
+      return `${ABC[rowIndex - 1]}${columnIndex}`;
+    },
+
+    getSquareRefValue: function(rowIndex, columnIndex) {
+      return output.methods.toAlgebraicNotation(rowIndex, columnIndex);
+    }
+  },
+  data: function() {
+    return {
+
+    }
+  },
+  mounted(){
+    output.setPiece('A1', new Piece());
   }
-}
+})
 </script>
 
 <style>

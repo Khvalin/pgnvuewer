@@ -1,18 +1,27 @@
 <template>
   <div class='b-sq' :class="color">
-    {{ id }}
+    <Piece v-if="{piece}" />
   </div>
 </template>
 
 <script>
 
+import Piece from 'components/board/Piece'
 
 export default {
   props:['color', 'id'],
   data: function () {
     return {
+      get piece(){
 
+      },
+      set piece(p){
+
+      }
     }
+  },
+  components: {
+    Piece
   }
 }
 </script>
