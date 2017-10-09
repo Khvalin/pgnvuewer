@@ -4,20 +4,17 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  count: 0
+  position: { d1: { type: 'Q', color: 'white' }, e8: { type: 'K', color: 'black' }, e1: { type: 'K', color: 'white' } }
 }
 
 const mutations = {
-  INCREMENT (state) {
-    state.count++
-  },
-  DECREMENT (state) {
-    state.count--
+  setPiece: function(coord, pieceData) {
+    //
   }
 }
 
 const actions = {
-  incrementAsync ({ commit }) {
+  incrementAsync({ commit }) {
     setTimeout(() => {
       commit('INCREMENT')
     }, 200)

@@ -1,6 +1,6 @@
 <template>
   <div class='b-sq' :class="color">
-    <Piece v-if="{piece}" />
+    <Piece v-if="hasPiece" v-bind="piece" />
   </div>
 </template>
 
@@ -9,15 +9,15 @@
 import Piece from 'components/board/Piece'
 
 export default {
-  props:['color', 'id'],
+  props:['color', 'id', 'piece'],
+  computed: {
+    hasPiece: function() {
+      return this.piece != null
+    }
+  },
   data: function () {
     return {
-      get piece(){
 
-      },
-      set piece(p){
-
-      }
     }
   },
   components: {
