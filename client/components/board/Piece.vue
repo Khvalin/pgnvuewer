@@ -34,5 +34,4 @@ export default {
   stroke: #000;
 }
 
-
 </style>
