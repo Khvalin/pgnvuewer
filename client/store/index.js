@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import chessDriver from '../drivers/chessDriver'
+
 Vue.use(Vuex)
 
-const state = {
-  position: { d1: { type: 'Q', color: 'white' }, e8: { type: 'K', color: 'black' }, e1: { type: 'K', color: 'white' } }
-}
-
 const mutations = {
+  getPositionFromChessDriver: function() {
+    return chessDriver.board()
+  },
   setPiece: function(coord, pieceData) {
     //
   }
+}
+
+const state = {
+  position: mutations.getPositionFromChessDriver()
 }
 
 const actions = {

@@ -12,11 +12,11 @@ export default {
   props:['type', 'color'],
   data: function () {
     const self = this;
-    const TYPE_TO_ICON_MAP = {K:'k', Q:'q'};
+
     return {
       get iconName(){
-        const color = self.color === 'black'? 'b': 'w';
-        return 'regular/'+color + ( TYPE_TO_ICON_MAP[self.type] || self.type);
+        const color = 'b';
+        return 'regular/' + color +  self.type;
       }
     }
   }
@@ -25,11 +25,11 @@ export default {
 
 <style>
 
-.chess-piece .piece.black{
+.chess-piece .piece.b{
   fill: #000;
   stroke: #FFF;
 }
-.chess-piece .piece.white{
+.chess-piece .piece.w{
   fill: #FFF;
   stroke: #000;
 }

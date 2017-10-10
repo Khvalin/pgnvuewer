@@ -16,6 +16,7 @@
 <script>
 import Square from 'components/board/Square'
 import Piece from 'components/board/Piece'
+import constants from '../../constants'
 
 let output = null;
 
@@ -28,8 +29,7 @@ export default (output = {
       
     },
     toAlgebraicNotation: function(rowIndex, columnIndex){
-      const ABC = 'abcdefgh';
-      return `${ABC[columnIndex - 1]}${rowIndex}`;
+      return `${constants.ABC[columnIndex - 1]}${rowIndex}`;
     },
 
     getSquareRefValue: function(rowIndex, columnIndex) {

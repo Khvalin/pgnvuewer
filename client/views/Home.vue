@@ -8,13 +8,11 @@
 </template>
 
 <script>
-import Counter from 'components/Counter'
 import Board from 'components/board/Board'
 
 export default {
   components: {
-    Board,
-    Counter
+    Board
   }
 }
 </script>
