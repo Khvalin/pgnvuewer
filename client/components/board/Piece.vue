@@ -34,4 +34,8 @@ export default {
   stroke: #000;
 }
 
+.chess-piece  svg.svg-icon{
+  display: block;
+}
+
 </style>

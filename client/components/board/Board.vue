@@ -4,8 +4,8 @@
     <div class="b-row" v-for="i in [8,7,6,5,4,3,2,1]" :key="i">
       <Square v-for="j in 8" :key="j"
         :ref="getSquareRefValue(i, j)"
-        :piece="$store.state.position[getSquareRefValue(i, j)]"
-        :id="`${i}${j}`"
+        :piece="$store.state.board.position[getSquareRefValue(i, j)]"
+        :id="getSquareRefValue(i, j)"
         :color="(i%2 === j%2)?'dark':'light'"
       />
     </div>
