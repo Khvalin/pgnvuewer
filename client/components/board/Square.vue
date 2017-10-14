@@ -1,5 +1,5 @@
 <template>
-  <div class='b-sq' v-on:click="onSelect" :class="color">
+  <div class='b-sq' v-on:click="onSelect" :class="[color, {highlight: isHighlighted}]">
     <Piece v-if="hasPiece" v-bind="piece" />
   </div>
 </template>
@@ -16,6 +16,11 @@
     computed: {
       hasPiece: function() {
         return this.piece != null
+      },
+      isHighlighted: function(){
+        const highlighted = this.$store.state.board.highlightedSquares
+
+        return ( highlighted[this.id])
       }
     },
     data: function() {
@@ -24,12 +29,12 @@
       }
     },
     methods: {
-      //    setSelectedSquare: function(){
-      //    },
+
       onSelect: function(e) {
-        this.setSelectedSquare(this.id);
+        this.$store.commit('highlightSquare', this.id)
+        
       },
-      ...mapMutations(['setSelectedSquare'])
+      ...mapMutations(['highlightSquare'])
     },
     components: {
       Piece
@@ -39,6 +44,7 @@
 
 <style>
   .b-sq {
+    
     background-color: var(--dark-sq-color);
     grid-row: 1/span 1;
     height: var(--square-size);
@@ -47,5 +53,9 @@
   
   .b-sq.light {
     background-color: var(--light-sq-color);
+  }
+
+  .b-sq.highlight{
+    border: 2px inset black ;
   }
 </style>

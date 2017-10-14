@@ -3,21 +3,24 @@ import Vuex from 'vuex'
 
 import chessDriver from '../drivers/chessDriver'
 
+const getPositionFromChessDriver = function() {
+  return chessDriver.board()
+}
+
 const mutations = {
-  getPositionFromChessDriver: function() {
-    return chessDriver.board()
-  },
   setPiece: function(coord, pieceData) {
     //
   },
 
-  setSelectedSquare(el, id) {
-    console.log(id)
+  highlightSquare(state, id) {
+    const newState = !!!state.highlightedSquares[id]
+    Vue.set(state.highlightedSquares, id, newState)
   }
 }
 
 const state = {
-  position: mutations.getPositionFromChessDriver()
+  position: getPositionFromChessDriver(),
+  highlightedSquares: {}
 }
 
 const actions = {
