@@ -6,8 +6,8 @@
 
 <style>
 :root {
-  --dark-sq-color: green;
-  --light-sq-color: grey;
+  --dark-sq-color: #70a070;
+  --light-sq-color: #e0d070;
   --square-size: 1.2em;
 
       -webkit-font-smoothing: antialiased;

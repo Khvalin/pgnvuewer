@@ -31,10 +31,12 @@
     methods: {
 
       onSelect: function(e) {
-        this.$store.commit('highlightSquare', this.id)
-        
+        e.preventDefault();
+
+        this.$store.commit('selectSquare', this.id)
+        return false  
       },
-      ...mapMutations(['highlightSquare'])
+     // ...mapMutations(['highlightSquare'])
     },
     components: {
       Piece
@@ -55,7 +57,7 @@
     background-color: var(--light-sq-color);
   }
 
-  .b-sq.highlight{
-    border: 2px inset black ;
+  .b-sq.highlight {
+    background-color: #b0d0e0;
   }
 </style>

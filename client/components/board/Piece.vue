@@ -11,12 +11,12 @@ import 'components/compiled-icons/'
 export default {
   props:['type', 'color'],
   data: function () {
-    const self = this;
+    const self = this
 
     return {
       get iconName(){
-        const color = 'b';
-        return 'regular/' + color +  self.type;
+        const color = 'b'
+        return `regular/${color}${self.type}`
       }
     }
   }
@@ -24,18 +24,23 @@ export default {
 </script>
 
 <style>
-
 .chess-piece .piece.b{
   fill: #000;
   stroke: #FFF;
 }
+
 .chess-piece .piece.w{
   fill: #FFF;
   stroke: #000;
 }
 
+.b-sq .piece{
+  /*stroke: transparent;*/
+}
+
 .chess-piece  svg.svg-icon{
   display: block;
 }
+
 
 </style>

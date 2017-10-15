@@ -8,6 +8,12 @@ class ChessDriver {
     _chess = new Chess()
   }
 
+  getMoves(sq) {
+    const moves = _chess.moves({ verbose: true, square: sq })
+
+    return moves.map((m) => m.to)
+  }
+
   board() {
     const board = _chess.board()
     var result = {}
