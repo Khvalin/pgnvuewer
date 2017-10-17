@@ -8,10 +8,18 @@ class ChessDriver {
     _chess = new Chess()
   }
 
+  get gameOver() {
+    return _chess.game_over()
+  }
+
+  makeMove(move) {
+    return _chess.move(move)
+  }
+
   getMoves(sq) {
     const moves = _chess.moves({ verbose: true, square: sq })
 
-    return moves.map((m) => m.to)
+    return moves
   }
 
   board() {

@@ -17,20 +17,39 @@ const mutations = {
     Vue.set(state.highlightedSquares, id, newState)
   },
 
-  selectSquare(state, id) {
-    let newState = !state.highlightedSquares[id]
-    if (newState) {
-      const moves = chessDriver.getMoves(id)
-      console.log(moves)
-
-      newState = !!moves.length
+  unselectSquare(id) {
+    if (id in state.highlightedSquares) {
+      Vue.set(state.highlightedSquares, id, false)
     }
-    Vue.set(state.highlightedSquares, id, newState)
+  },
+
+  selectSquare(state, id) {
+    if (!chessDriver.gameOver) {
+      let selected = !state.highlightedSquares[id]
+      if (selected) {
+        const moves = chessDriver.getMoves(id)
+
+        if (moves.length) {
+          mutations.unselectSquare(state.startSquare)
+          state.startSquare = id
+          state.availableMoves = moves
+          selected = true
+        } else {
+          const newMove = state.availableMoves.find((m) => id === m.to)
+          if (newMove && chessDriver.makeMove(newMove)) {
+            actions.updatePositionFromChessDriver()
+          }
+        }
+      }
+      Vue.set(state.highlightedSquares, id, selected)
+    }
   }
 }
 
 const state = {
-  position: getPositionFromChessDriver(),
+  position: [],
+  startSquare: null,
+  availableMoves: [],
   highlightedSquares: {}
 }
 
@@ -39,8 +58,20 @@ const actions = {
     setTimeout(() => {
       commit('INCREMENT')
     }, 200)
+  },
+  resetSelection() {
+    state.availableMoves = []
+    state.startSquare = null
+    state.highlightedSquares = {}
+  },
+
+  updatePositionFromChessDriver() {
+    this.resetSelection()
+    state.position = getPositionFromChessDriver()
   }
 }
+
+actions.updatePositionFromChessDriver()
 
 const boardStore = {
   state,
