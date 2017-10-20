@@ -5,6 +5,15 @@
 </template>
 
 <style>
+:root {
+  --dark-sq-color: #70a070;
+  --light-sq-color: #e0d070;
+  --square-size: 1.2em;
+
+      -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   margin: 0;
   font-size: 2rem;
@@ -24,4 +33,5 @@ body {
     border-radius: 2px;
   }
 }
+
 </style>

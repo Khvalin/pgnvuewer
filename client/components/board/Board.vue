@@ -2,7 +2,12 @@
   <div class="board-wrapper">
     <div class="board">
     <div class="b-row" v-for="i in [8,7,6,5,4,3,2,1]" :key="i">
-      <Square :ref="getSquareRefValue(i, j)" :id="`${i}${j}`" :color="(i%2 === j%2)?'dark':'light'" v-for="j in 8" :key="j" />
+      <Square v-for="j in 8" :key="j"
+        :ref="getSquareRefValue(i, j)"
+        :piece="$store.state.board.position[getSquareRefValue(i, j)]"
+        :id="getSquareRefValue(i, j)"
+        :color="(i%2 === j%2)?'dark':'light'"
+      />
     </div>
     </div>
   </div>
@@ -11,6 +16,7 @@
 <script>
 import Square from 'components/board/Square'
 import Piece from 'components/board/Piece'
+import constants from '../../constants'
 
 let output = null;
 
@@ -19,12 +25,11 @@ export default (output = {
     Square
   },
   methods: {
-    setPiece: function(coord, piece){
+    setPiece: function(coord, pieceData){
       
     },
     toAlgebraicNotation: function(rowIndex, columnIndex){
-      const ABC = 'ABCDEFGH';
-      return `${ABC[rowIndex - 1]}${columnIndex}`;
+      return `${constants.ABC[columnIndex - 1]}${rowIndex}`;
     },
 
     getSquareRefValue: function(rowIndex, columnIndex) {
@@ -37,17 +42,13 @@ export default (output = {
     }
   },
   mounted(){
-    output.setPiece('A1', new Piece());
+    //output.setPiece('A1', {type: 'K'});
   }
 })
 </script>
 
 <style>
 .board{ 
-  --dark-sq-color: black;
-  --light-sq-color: white;
-  --square-size: 1.2em;
-
   width: calc(8 * var(--square-size) ); 
   height: calc(8 * var(--square-size) ); 
 
