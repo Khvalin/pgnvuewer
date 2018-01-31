@@ -26,30 +26,31 @@ const mutations = {
   selectSquare(state, id) {
     if (!chessDriver.gameOver) {
       let selected = !state.highlightedSquares[id]
-      if (selected) {
-        const moves = chessDriver.getMoves(id)
 
-        if (moves.length) {
-          mutations.unselectSquare(state.startSquare)
-          state.startSquare = id
-          state.availableMoves = moves
-          selected = true
-        } else {
-          const newMove = state.availableMoves.find((m) => id === m.to)
-          if (newMove && chessDriver.makeMove(newMove)) {
-            actions.updatePositionFromChessDriver()
-          }
+      const moves = chessDriver.getMoves(id)
+
+      Vue.set(state.highlightedSquares, state.newMove.from, false)
+
+      if (moves.length) {
+        state.newMove.from = id
+        state.newMove.availableMoves = moves.map((m) => m.to)
+
+        Vue.set(state.highlightedSquares, id, selected)
+      } else {
+        const to = state.newMove.availableMoves.find((m) => m === id)
+        if (to) {
+          chessDriver.makeMove({ to, from: state.newMove.from })
+          actions.updatePositionFromChessDriver()
         }
       }
-      Vue.set(state.highlightedSquares, id, selected)
     }
   }
 }
 
 const state = {
   position: [],
-  startSquare: null,
-  availableMoves: [],
+  newMove: { from: null, availableMoves: [] },
+
   highlightedSquares: {}
 }
 
@@ -61,7 +62,7 @@ const actions = {
   },
   resetSelection() {
     state.availableMoves = []
-    state.startSquare = null
+    state.newMove = { from: null, availableMoves: [] }
     state.highlightedSquares = {}
   },
 
